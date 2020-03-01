@@ -10,7 +10,7 @@
 # echo Hello | ./filetype.sh /dev/stdin
 [ -p "$1" ] && echo named pipe
 
-# ./filetype.sh 0, ignore erros if $1 is not an integer
+# ./filetype.sh 0 - ignore erros if $1 is not an integer
 [ -t "$1" ] 2> /dev/null && echo terminal
 
 # ./filetype.sh .
@@ -19,7 +19,7 @@
 # ./filetype.sh /dev/stdin
 [ -L "$1" ] && echo symbolic link
 
-# ./filetype.sh [any file]
+# ./filetype.sh filetype.sh
 [ -f "$1" ] && echo regular file
 
 # ./filetype.sh bogus
