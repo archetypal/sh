@@ -2,17 +2,20 @@
 
 # integer tests
 
-if [ $# -ne 2 ]; then
+if [ $# -ne 2 ]
+then
   echo Expecting 2 arguments
   exit 1
 fi
 
-if ! [ $1 -eq $1 ] 2> /dev/null; then
+if ! [ $1 -eq $1 ] 2> /dev/null
+then
   echo First argument must be an integer
   exit 1
 fi
 
-if ! [ $2 -eq $2 ] 2> /dev/null; then
+if ! [ $2 -eq $2 ] 2> /dev/null
+then
   echo Second argument must be an integer
   exit 1
 fi
@@ -34,4 +37,3 @@ fi
 
 # is not equal to
 [ $1 -ne $2 ] && echo $1 is not equal to $2
-              
