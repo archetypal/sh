@@ -1,5 +1,5 @@
 #!/bin/sh
 
-while IFS=: read key value; do
+while IFS=: read key value || [ "$key" ]; do
   echo $key = $value
 done < read.txt
