@@ -20,7 +20,10 @@
 [ -L "$1" ] && echo symbolic link
 
 # ./filetype.sh filetype.sh
+[ -x "$1" ] && echo executable file
+
+# ./filetype.sh filetype.sh
 [ -f "$1" ] && echo regular file
 
 # ./filetype.sh bogus
-[ ! -f "$1" ] && echo not a regular file
+! [ -f "$1" ] && echo not a regular file
