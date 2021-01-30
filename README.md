@@ -4,14 +4,14 @@ Shell script examples.
 
 ## [Parameter Expansion](expanstion.sh)
 
-Parameter expansion - ${1-x} for example.
+[Parameter expansion](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_06_02) tests and examples.  For example, [ -z ${1+x} ] will return an exit code of 0 (true) if $1 is unset, ${1-x} will default to x if $1 is unset.  
 
 ```bash
-# unset and not null  (unintuitively, unset is not null by definition)
+# unset and not empty  (unintuitively, unset is not null by definition)
 ./expansion.sh
-# set and null
+# set and empty
 ./expansion.sh ""
-# set and not null
+# set and not empty
 ./expansion.sh 4343
 ```
 
@@ -28,7 +28,7 @@ Test the file types.
 
 ## [Read](read.sh)
 
-Read/parse a file
+Read/parse a file with no need to have a blank line at the end of the file.
 
 ```bash
 ./read.sh
