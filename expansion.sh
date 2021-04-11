@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=SC2016
 
 # Shell Command Language
 #
@@ -8,34 +9,46 @@
 #
 
 echo
-echo 'Parameter Expansion:  $1='${1-'<unset>'}
+echo 'Parameter Expansion:  $1='"${1-'<unset>'}"
 echo
 
-echo test, []  -- condition evaluation utility
+echo test, [] -- condition evaluation utility
 echo
 
+#
+# use default if unset (-)
+#
+
 # ./expansion.sh ""
-[ -z ${1-x} ]   && echo 'empty               [ -z ${1-x} ]'
+! [ "${1-_}" ] &&
+  echo 'set and empty       ! [ "${1-_}" ]'
 
 # ./expansion.sh
 # ./expansion.sh hello
-! [ -z ${1-x} ] && echo 'not empty           ! [ -z ${1-x} ]'
+[ "${1-_}" ] &&
+  echo 'unset or not empty    [ "${1-_}" ]'
 
-# cannot use [ -n ${1+0} ] as `test -n` returns 0 because '-n' is interpreted as a string, not a flag
+#
+# use substitute if set (x)
+#
+
 # ./expansion.sh ""
 # ./expansion.sh hello
-! [ -z ${1+x} ] && echo 'set                 ! [ -z ${1+x} ]'
+[ "${1+_}" ] &&
+  echo 'set                   [ "${1+_}" ]'
 
-# if $1 is unset, then nothing is used, and `test -z` return 0.  If $1 is set, then "x" is substituted
 # ./expansion.sh
-[ -z ${1+x} ]   && echo 'unset               [ -z ${1+x} ]'
+! [ "${1+_}" ] &&
+  echo 'unset               ! [ "${1+_}" ]'
 
 # ./expansion.sh hello
-[ $1 ] &&          echo 'set and not empty   [ $1 ]'
+[ "$1" ] &&
+  echo 'set and not empty         [ "$1" ]'
 
 # ./expansion.sh
 # ./expansion.sh ""
-! [ $1 ] &&        echo 'unset or empty      ! [ $1 ]'
+! [ "$1" ] &&
+  echo 'unset or empty          ! [ "$1" ]'
 
 echo
 echo expansions
@@ -45,4 +58,3 @@ echo 'default if unset or empty               ${1:-x} = '${1:-x}
 echo 'default if empty                   ${1:-${1+x}} = '${1:-${1+x}}
 echo 'substitute set                           ${1+x} = '${1+x}
 echo 'substitute set and not empty            ${1:+x} = '${1:+x}
-echo 'substitute not empty  $(y=${1-x}; echo ${y:+x}) = '$(y=${1-x}; echo ${y:+x})

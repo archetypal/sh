@@ -1,0 +1,12 @@
+README.md
+args.sh
+expansion.sh
+filetype.sh
+ls.txt
+path.sh
+read.sh
+read.txt
+readvar.sh
+space name.txt
+testinteger.sh
+teststring.sh
